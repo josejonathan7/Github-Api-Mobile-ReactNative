@@ -3,7 +3,7 @@ import { Route, Routes, NativeRouter } from 'react-router-native';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
 import { StatusBar } from 'expo-status-bar';
-import { Home, Repositories } from './src/screens';
+import { Home, RepositoriesStarred } from './src/screens';
 import { GithubProvider } from './src/Context/github';
 
 export default function App() {
@@ -20,7 +20,8 @@ export default function App() {
       <NativeRouter>
         <Routes >
           <Route path="/" element={<Home/>} />
-          <Route path="/repositories" element={<Repositories/>} />
+          <Route path="/repositories" element={<RepositoriesStarred type="repositories" />} />
+          <Route path="/starred" element={<RepositoriesStarred type="starred" />} />
         </Routes>
       </NativeRouter>
     </GithubProvider>

@@ -60,7 +60,7 @@ export function Profile() {
 
             <View style={styles.buttonGroup}>
                 <Button
-                    title="Repositórios"
+                    title="REPOSITÓRIOS"
                     color="#CCC"
                     backgroundColor="transparent"
                     icon="rocket1"
@@ -68,10 +68,11 @@ export function Profile() {
                 />
 
                 <Button
-                    title="Estrelados"
+                    title="ESTRELADOS"
                     color="#CCC"
                     backgroundColor="transparent"
                     icon="star"
+                    onPress={() => navigate('/starred')}
                 />
             </View>
         </View>

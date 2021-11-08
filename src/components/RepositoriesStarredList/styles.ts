@@ -16,7 +16,15 @@ export const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     userFullName: {
+        paddingTop: 5,
         flexDirection: "row",
-        alignItems: "center"
+        justifyContent: "space-between",
+        alignItems: "flex-start"
+    },
+    text: {
+        flexShrink: 1,
+        color: "#00BFFF",
+        borderBottomColor: "#00BFFF",
+        marginLeft: 10
     }
 })

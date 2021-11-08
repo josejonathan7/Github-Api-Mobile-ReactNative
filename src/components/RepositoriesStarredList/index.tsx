@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Linking, Button } from "react-native";
 import { Link } from 'react-router-native';
 import { GithubContext } from "../../Context/github";
 import { styles } from "./styles";
@@ -15,7 +15,7 @@ type Props = {
     render: 'repositories' | 'starred';
 }
 
-export function RepositoriesStarredList({ render= "repositories" }: Props) {
+export function RepositoriesStarredList({ render }: Props) {
     const { githubState, getUserRepos, getUserStarred } = useContext(GithubContext);
     const [hasUserForSearchrepos, setHasUserForSearchrepos] = useState(false);
 
@@ -31,12 +31,16 @@ export function RepositoriesStarredList({ render= "repositories" }: Props) {
         return (
             <View style={styles.container} key={ item.id }>
                 <View style={styles.userNameContainer}>
-                    <Text style={{color:"#FFF"}}  >Name:</Text>
-                    <Text style={{color:"#FFF"}}  >{ item.name }</Text>
+                    <Text style={[styles.text, {color:"#FFF",  marginLeft: 0}]}  >Name:</Text>
+                    <Text style={[styles.text,{color:"#FFF", flexShrink: 1}]}  >{ item.name }</Text>
                 </View>
                 <View style={styles.userFullName} >
                     <Text  style={{color:"#FFF"}} >FullName: </Text>
-                    <Link to={ item.html_url } ><Text style={{color:"#FFF"}}>{ item.full_name }</Text></Link>
+                    <Text 
+                        children={item.full_name} 
+                        onPress={ ()=>{ Linking.openURL(item.html_url)}}
+                        style={styles.text}
+                    />
                 </View>
             </View>
         );
@@ -45,9 +49,17 @@ export function RepositoriesStarredList({ render= "repositories" }: Props) {
     const renderStarred = (item: RepositoriesStarred) => {
         return (
             <View style={styles.container} key={ item.id }>
+                <View style={styles.userNameContainer}>
+                    <Text style={[styles.text, {color:"#FFF",  marginLeft: 0}]}  >Name:</Text>
+                    <Text style={[styles.text,{color:"#FFF", flexShrink: 1}]}  >{ item.name }</Text>
+                </View>
                 <View style={styles.userFullName} >
                     <Text  style={{color:"#FFF"}} >FullName: </Text>
-                    <Link to={ item.html_url } ><Text style={{color:"#FFF"}}>{ item.full_name }</Text></Link>
+                    <Text 
+                        children={item.full_name} 
+                        onPress={ ()=>{ Linking.openURL(item.html_url)}}
+                        style={styles.text}
+                    />
                 </View>
             </View>
         );
@@ -55,7 +67,14 @@ export function RepositoriesStarredList({ render= "repositories" }: Props) {
 
     return (
         <>
-            { render === 'repositories' ? githubState.repositories.map(renderRepos) : githubState.starred.map(renderStarred) }
+            { hasUserForSearchrepos ? 
+                <>
+                    {
+                        render === 'repositories' ? githubState.repositories.map(renderRepos) : githubState.starred.map(renderStarred) 
+                    }
+                </>
+                : <Text></Text>
+            }
         </>
     );
 }

@@ -5,7 +5,11 @@ import { UserPhoto, Button, RepositoriesStarredList } from '../../components';
 import { GithubContext } from "../../Context/github";
 import { styles } from './styles';
 
-export function Repositories() {
+type Props = {
+    type: "repositories" | "starred";
+}
+
+export function RepositoriesStarred({type} : Props) {
     const navigate = useNavigate();
     const { githubState } = useContext(GithubContext);
 
@@ -29,7 +33,7 @@ export function Repositories() {
                 keyboardShouldPersistTaps="never"
                 contentContainerStyle={styles.content}
             >
-                <RepositoriesStarredList render="repositories"  />
+                <RepositoriesStarredList render={type}  />
             </ScrollView >
         </View>
     );
