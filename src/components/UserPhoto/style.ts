@@ -3,7 +3,6 @@ import { COLORS } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
     container: {
-        marginTop: 30,
         justifyContent: 'center',
         alignItems: 'center'
     },

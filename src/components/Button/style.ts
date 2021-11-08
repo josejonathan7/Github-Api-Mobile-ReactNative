@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 8,
         padding: 6,
-        
+        alignItems: "center"
     },
     title: {
         fontFamily: FONTS.BOLD
